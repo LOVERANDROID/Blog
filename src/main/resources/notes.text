@@ -1,0 +1,11 @@
+关于reset方式的uri
+
+如果请求时/employees/empId  method=get 那么就是查询员工
+/employee method=post 那么就是保存员工
+/employee/empId method=put 那么就是修改员工
+/employee/empid method=delete 那么就是删除员工
+
+1、POST    /url      创建
+2、DELETE  /url/xxx  删除
+3、PUT     /url/xxx  更新
+4、GET     /url/xxx  查看

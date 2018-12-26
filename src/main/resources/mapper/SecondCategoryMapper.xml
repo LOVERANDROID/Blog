@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.SecondCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.blog.model.SecondCategory">
+    <id column="sec_category_id" jdbcType="INTEGER" property="secCategoryId" />
+    <result column="sec_category_name" jdbcType="VARCHAR" property="secCategoryName" />
+    <result column="sec_create_time" jdbcType="VARCHAR" property="secCreateTime" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    sec_category_id, sec_category_name, sec_create_time, category_id
+  </sql>
+  <select id="selectByExample" parameterType="com.blog.model.SecondCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from secondcategories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from secondcategories
+    where sec_category_id = #{secCategoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from secondcategories
+    where sec_category_id = #{secCategoryId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.blog.model.SecondCategoryExample">
+    delete from secondcategories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.blog.model.SecondCategory">
+    insert into secondcategories (sec_category_id, sec_category_name, sec_create_time, 
+      category_id)
+    values (#{secCategoryId,jdbcType=INTEGER}, #{secCategoryName,jdbcType=VARCHAR}, #{secCreateTime,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.blog.model.SecondCategory">
+    insert into secondcategories
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="secCategoryId != null">
+        sec_category_id,
+      </if>
+      <if test="secCategoryName != null">
+        sec_category_name,
+      </if>
+      <if test="secCreateTime != null">
+        sec_create_time,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="secCategoryId != null">
+        #{secCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="secCategoryName != null">
+        #{secCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="secCreateTime != null">
+        #{secCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.blog.model.SecondCategoryExample" resultType="java.lang.Long">
+    select count(*) from secondcategories
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update secondcategories
+    <set>
+      <if test="record.secCategoryId != null">
+        sec_category_id = #{record.secCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="record.secCategoryName != null">
+        sec_category_name = #{record.secCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.secCreateTime != null">
+        sec_create_time = #{record.secCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.categoryId != null">
+        category_id = #{record.categoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update secondcategories
+    set sec_category_id = #{record.secCategoryId,jdbcType=INTEGER},
+      sec_category_name = #{record.secCategoryName,jdbcType=VARCHAR},
+      sec_create_time = #{record.secCreateTime,jdbcType=VARCHAR},
+      category_id = #{record.categoryId,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.blog.model.SecondCategory">
+    update secondcategories
+    <set>
+      <if test="secCategoryName != null">
+        sec_category_name = #{secCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="secCreateTime != null">
+        sec_create_time = #{secCreateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where sec_category_id = #{secCategoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.blog.model.SecondCategory">
+    update secondcategories
+    set sec_category_name = #{secCategoryName,jdbcType=VARCHAR},
+      sec_create_time = #{secCreateTime,jdbcType=VARCHAR},
+      category_id = #{categoryId,jdbcType=INTEGER}
+    where sec_category_id = #{secCategoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+    <context id="DB2Tables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost/blog"
+                        userId="root"
+                        password="root">
+        </jdbcConnection>
+
+        <javaTypeResolver >
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <!--javabean生成的位置-->
+        <javaModelGenerator targetPackage="com.blog.model" targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--映射文件生成位置-->
+        <sqlMapGenerator targetPackage="mapper"  targetProject=".\src\main\resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <!--dao接口生成位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.blog.dao"  targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="contents" domainObjectName="Content" >
+        </table>
+        <!--<table tableName="comments" domainObjectName="Comment" >-->
+        <!--</table>-->
+        <!--<table tableName="users" domainObjectName="User" >-->
+        <!--</table>-->
+        <!--<table tableName="notices" domainObjectName="Notice" >-->
+        <!--</table>-->
+        <!--<table tableName="categories" domainObjectName="Category">-->
+        <!--</table>-->
+        <!--<table tableName="secondcategories" domainObjectName="SecondCategory">-->
+        <!--</table>-->
+
+    </context>
+</generatorConfiguration>
